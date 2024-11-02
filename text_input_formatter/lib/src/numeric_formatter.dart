@@ -1,8 +1,3 @@
-/// A custom numeric formatter class that extends [PatternFormatter] to format numeric input,
-/// supporting localization, fractional input, and specific fraction digit limitations.
-///
-/// This formatter is useful in formatting and validating user input for numeric values, particularly
-/// in text fields. It ensures proper handling of decimals, commas, and locales.
 import 'dart:math';
 import 'package:decimal/decimal.dart';
 import 'package:decimal/intl.dart';

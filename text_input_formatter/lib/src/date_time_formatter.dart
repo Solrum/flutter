@@ -105,8 +105,10 @@ class DateFormatter extends PatternFormatter {
         .where((index) => index >= 0 && index <= input.length)
         .toList();
 
-    if (indices.isEmpty)
-      return input; // Return input if no separators are needed
+    if (indices.isEmpty) {
+      // Return input if no separators are needed
+      return input;
+    }
 
     List<String> chars = [];
 
