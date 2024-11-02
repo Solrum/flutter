@@ -16,7 +16,7 @@ Add pubspec.yaml
 
 ```yaml
 dependencies:
-  currency_text_input_formatter: ^1.0.0
+  text_input_formatter: ^1.0.0
 ```
 
 ### Solving Intl package conflict
@@ -28,7 +28,7 @@ dependency_overrides:
 ## Usage
 
 ```dart
-import 'package:input_formatter/input_formatter.dart';
+import 'package:text_input_formatter/text_input_formatter.dart';
 ```
 
 ### Numeric Format
