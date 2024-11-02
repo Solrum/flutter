@@ -1,0 +1,1 @@
+[solrum.dev] Flutter plugins
