@@ -1,8 +1,8 @@
 name: selectify
 description: "A flexible and highly customizable Flutter library for single and multiple selections, offering functionality similar to radio and checkbox buttons."
-version: 1.0.0
+version: 1.0.1
 homepage: https://solrum.dev
-repository: https://github.com/solrum/flutter/tree/master/selection
+repository: https://github.com/solrum/flutter/tree/main/selectify
 
 environment:
   sdk: "^3.0.0"

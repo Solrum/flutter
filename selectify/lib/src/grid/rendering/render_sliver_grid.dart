@@ -422,13 +422,6 @@ class SelectionGridConfiguration {
     return null;
   }
 
-  /// Calculates the main axis extent of a selection tile.
-  double _getTileMainAxisExtent(SelectionTile tile) {
-    return tile.mainAxisExtent ??
-        (tile.mainAxisCellCount! * cellExtent) +
-            (tile.mainAxisCellCount! - 1) * mainAxisSpacing;
-  }
-
   /// Normalizes the provided selection tile to ensure it is a valid tile.
   SelectionTile? _normalizeTile(SelectionTile? selectionTile) {
     if (selectionTile == null) {
