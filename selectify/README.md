@@ -11,8 +11,8 @@ Selectify is a versatile Flutter library that simplifies the creation of selecti
 	-	Works with Custom Widgets: Extend functionality using custom item builders to create unique selection experiences.
 
 <p align="center">
-    <img width="40%" style="margin-right: 20px;" src="https://github.com/solrum/flutter/tree/master/selection/screenshots/single.png"/>
-    <img width="40%" src="https://github.com/solrum/flutter/tree/master/selection/screenshots/multiple.png"/>
+    <img width="40%" style="margin-right: 20px;" src="https://github.com/solrum/flutter/blob/main/selectify/screenshots/multiple.png?raw=true"/>
+    <img width="40%" src="https://github.com/solrum/flutter/blob/main/selectify/screenshots/single.png?raw=true"/>
 </p>
 
 ## Getting Started
