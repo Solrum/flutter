@@ -1,0 +1,28 @@
+analyzer:
+  exclude:
+    - build/**
+    - README.md
+    - pubspec.yaml
+  errors:
+    deprecated_member_use: ignore
+    deprecated_field: ignore
+    analysis_option_deprecated: ignore
+    deprecated_colon_for_default_value: ignore
+    deprecated_consistency: ignore
+    deprecated_member_use_from_same_package: ignore
+    deprecated_export_use: ignore
+    deprecated_new_in_comment_reference: ignore
+    deprecated_subtype_of_function: ignore
+    provide_deprecation_message: ignore
+    unused_field: ignore
+    must_be_immutable: ignore
+    unused_element: ignore
+
+linter:
+  rules:
+    avoid_print: false
+    prefer_single_quotes: false
+    require_trailing_commas: true
+
+# Additional information about this file can be found at
+# https://dart.dev/guides/language/analysis-options
