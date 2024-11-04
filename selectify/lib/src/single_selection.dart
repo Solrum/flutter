@@ -20,7 +20,7 @@ class SingleSelection<T> extends StatefulWidget {
   final T? initialValue;
 
   /// Callback invoked when the selected item changes.
-  final ValueChanged<T>? onChanged;
+  final ValueChanged<T?>? onChanged;
 
   /// Configuration for the selection layout.
   final SelectionConfig? config;
@@ -37,6 +37,8 @@ class SingleSelection<T> extends StatefulWidget {
 
   final Axis direction;
 
+  final bool allowDeselection;
+
   const SingleSelection._({
     super.key,
     required this.items,
@@ -49,6 +51,7 @@ class SingleSelection<T> extends StatefulWidget {
     this.compareFn,
     this.shrinkWrap = false,
     this.direction = Axis.vertical,
+    this.allowDeselection = true,
   });
 
   /// Creates a grid layout for the selection items.
@@ -58,12 +61,13 @@ class SingleSelection<T> extends StatefulWidget {
     SelectionItemBuilder<T>? itemBuilder,
     T? initialValue,
     int crossAxisCount = 1,
-    ValueChanged<T>? onChanged,
+    ValueChanged<T?>? onChanged,
     SelectionConfig? config,
     ScrollPhysics? physics,
     String Function(T)? valueShow,
     bool Function(T, T?)? compareFn,
     bool shrinkWrap = false,
+    bool allowDeselection = true,
   }) {
     return SingleSelection<T>._(
       key: key,
@@ -75,6 +79,7 @@ class SingleSelection<T> extends StatefulWidget {
       valueShow: valueShow,
       compareFn: compareFn,
       shrinkWrap: shrinkWrap,
+      allowDeselection: allowDeselection,
       config: (config ?? SelectionConfig()).copyWith(
         crossAxisCount: crossAxisCount,
       ),
@@ -87,13 +92,14 @@ class SingleSelection<T> extends StatefulWidget {
     required List<T> items,
     SelectionItemBuilder<T>? itemBuilder,
     T? initialValue,
-    ValueChanged<T>? onChanged,
+    ValueChanged<T?>? onChanged,
     SelectionConfig? config,
     ScrollPhysics? physics,
     String Function(T)? valueShow,
     bool Function(T, T?)? compareFn,
     bool shrinkWrap = false,
     Axis direction = Axis.vertical,
+    bool allowDeselection = true,
   }) {
     return SingleSelection<T>._(
       key: key,
@@ -106,6 +112,7 @@ class SingleSelection<T> extends StatefulWidget {
       compareFn: compareFn,
       shrinkWrap: shrinkWrap,
       direction: direction,
+      allowDeselection: allowDeselection,
       config: (config ?? SelectionConfig()).copyWith(
         crossAxisCount: 0,
       ),
@@ -161,13 +168,15 @@ class _SingleSelectionState<T> extends State<SingleSelection<T>>
   }
 
   void onTap(T item, bool isSelected) {
-    if (isSelected) return;
-
-    setState(() {
+    if (isSelected && widget.allowDeselection) {
+      selectedItem = null;
+    } else {
       selectedItem = item;
-    });
+    }
 
-    widget.onChanged?.call(item);
+    setState(() {});
+
+    widget.onChanged?.call(selectedItem);
   }
 
   @override

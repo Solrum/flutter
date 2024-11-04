@@ -11,7 +11,7 @@ Selectify is a versatile Flutter library that simplifies the creation of selecti
 	-	Works with Custom Widgets: Extend functionality using custom item builders to create unique selection experiences.
 
 <p align="center">
-    <img width="40%" style="margin-right: 20px;" src="https://github.com/solrum/flutter/blob/main/selectify/screenshots/multiple.png?raw=true"/>
+    <img width="40%" src="https://github.com/solrum/flutter/blob/main/selectify/screenshots/multiple.png?raw=true" style="margin-right: 20px;"/>
     <img width="40%" src="https://github.com/solrum/flutter/blob/main/selectify/screenshots/single.png?raw=true"/>
 </p>
 
@@ -20,7 +20,7 @@ To get started, add selectify to your project by including it in your pubspec.ya
 
 ```yaml
 dependencies:
-  selectify: ^1.0.0
+  selectify: ^1.0.1
 ```
 
 Then, import the library:
@@ -31,7 +31,7 @@ import 'package:selectify/selectify.dart';
 ## Usage
 
 ### Single Selection Example
-**Wrap items**
+**Wrap Layout**
 
 Display items in a wrap layout that adjusts based on available screen width.
 ```dart
@@ -42,6 +42,7 @@ SingleSelection<String>.wrap(
 ),
 ```
 **Grid Layout**
+
 Organize items in a grid with a defined number of items per row.
 ```dart
 SingleSelection<String>.grid(
@@ -65,7 +66,7 @@ MultipleSelection<String>.wrap(
 ```
 
 ### Customization
-Grid Layout with Custom SelectionModel (to control each item’s display properties.)
+Grid Layout with custom SelectionModel<T> (to control each item’s display properties.)
 ```dart
 MultipleSelection<SelectionModel<String>>.grid(
     ...
