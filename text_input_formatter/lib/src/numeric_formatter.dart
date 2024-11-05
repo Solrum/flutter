@@ -1,9 +1,11 @@
 import 'dart:math';
+
 import 'package:decimal/decimal.dart';
 import 'package:decimal/intl.dart';
 import 'package:flutter/services.dart';
-import 'package:text_input_formatter/src/pattern_formatter.dart';
 import 'package:intl/intl.dart';
+
+import 'pattern_formatter.dart';
 
 /// Maximum number of digits allowed in the formatted numeric input.
 const _MAX_DIGITS = 18;
@@ -32,6 +34,9 @@ class NumericFormatter extends PatternFormatter {
   /// Maximum number of fraction digits to allow in the input.
   final int? fractionDigits;
 
+  /// Separator for the decimal group
+  late final String thousandSeparator;
+
   /// Allows fractional input if true.
   final bool allowFraction;
 
@@ -54,17 +59,21 @@ class NumericFormatter extends PatternFormatter {
     this.locale,
     this.allowFraction = false,
     this.fractionDigits,
+    String? thousandSeparator,
     String? separator,
   }) : assert(fractionDigits == null || fractionDigits <= _MAX_DIGITS) {
     formatter = numberFormat ??
         NumberFormat.decimalPatternDigits(
-            decimalDigits: fractionDigits, locale: locale);
+          decimalDigits: fractionDigits,
+          locale: locale,
+        );
     this.separator = separator ?? formatter.symbols.DECIMAL_SEP;
+    this.thousandSeparator = thousandSeparator ?? formatter.symbols.GROUP_SEP;
     regex = RegExp(allowFraction ? '[0-9]+([${this.separator}])?' : r'\d+');
     filteringInputFormatter = FilteringTextInputFormatter.allow(regex);
 
-    assert(formatter.symbols.GROUP_SEP != this.separator,
-        '"separator cannot be the same as [group separator]"');
+    assert(this.thousandSeparator != this.separator,
+        '"separator cannot be the same as thousandSeparator"');
   }
 
   /// Formats the given [newValue] based on the pattern.
@@ -98,12 +107,21 @@ class NumericFormatter extends PatternFormatter {
           '${inputDecimals[0]}${_getDecimalSep()}${inputDecimals[1].substring(0, digits)}';
     }
 
-    ///
     final number = Decimal.tryParse(decimals) ?? Decimal.zero;
-    formatter = NumberFormat.decimalPatternDigits(
-        decimalDigits: digits, locale: locale);
 
-    final result = DecimalFormatter(formatter).format(number);
+    formatter = NumberFormat.decimalPatternDigits(
+      decimalDigits: digits,
+      locale: locale,
+    );
+
+    var result = DecimalFormatter(formatter).format(number);
+
+    if (thousandSeparator != formatter.symbols.GROUP_SEP) {
+      result = result.replaceAll(
+        formatter.symbols.GROUP_SEP,
+        thousandSeparator,
+      );
+    }
     return allowFraction && value.endsWith(separator)
         ? '$result$separator'
         : result;
@@ -148,8 +166,11 @@ class NumericFormatter extends PatternFormatter {
   ///
   /// Returns the original [Decimal] value or `null` if parsing fails.
   @override
-  String? original(String value) =>
-      DecimalFormatter(formatter).tryParse(value)?.toString();
+  String? original(String value) => DecimalFormatter(formatter)
+      .tryParse(
+        value.replaceAll(thousandSeparator, formatter.symbols.GROUP_SEP),
+      )
+      ?.toString();
 
   /// Returns the correct decimal separator based on the current [separator] setting.
   ///
