@@ -33,6 +33,12 @@ class MyHomePage extends StatefulWidget {
 class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
+    final formatter = NumericFormatter(
+      allowFraction: true,
+      fractionDigits: 5,
+      thousandSeparator: ' ',
+    );
+
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Theme.of(context).colorScheme.inversePrimary,
@@ -50,12 +56,10 @@ class _MyHomePageState extends State<MyHomePage> {
                   label: Text('Numeric'),
                   border: OutlineInputBorder(),
                 ),
-                inputFormatters: [
-                  NumericFormatter(
-                    allowFraction: true,
-                    fractionDigits: 5,
-                  ),
-                ],
+                inputFormatters: [formatter],
+                onChanged: (value) {
+                  print(formatter.original(value));
+                },
               ),
               const SizedBox(height: 20),
 

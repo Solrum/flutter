@@ -1,3 +1,7 @@
+import 'dart:math';
+
+import 'package:flutter/services.dart';
+
 /// An abstract class [PatternFormatter] that extends [TextInputFormatter] to provide a base for
 /// custom input formatting. It allows for the creation of specialized formatters that enforce
 /// a specific input pattern in a text field.
@@ -6,10 +10,6 @@
 /// and updating the cursor position based on inserted characters.
 /// Classes that inherit from [PatternFormatter] should implement the [checkUserInput],
 /// [format], and [checkValidValue] methods.
-
-import 'dart:math';
-import 'package:flutter/services.dart';
-
 abstract class PatternFormatter extends TextInputFormatter {
   /// Formats the input value based on a specified pattern, enforcing the input
   /// restrictions defined in this formatter.

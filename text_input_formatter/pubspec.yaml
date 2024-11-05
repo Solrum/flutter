@@ -1,6 +1,6 @@
 name: text_input_formatter
 description: "A Flutter package that provides customizable input formatting for text fields."
-version: 1.0.0+1
+version: 1.0.2
 homepage: https://solrum.dev
 repository: https://github.com/solrum/flutter/tree/master/text_input_formatter
 
